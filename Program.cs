@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualBasic;
+using Microsoft.VisualBasic;
 using System;
 using System.Net;
 using System.Runtime.ConstrainedExecution;
@@ -136,16 +136,16 @@ namespace simpleCache
             DownloadCache cache = new DownloadCache(2);
             int first, second;
 
-            timestamp("About to make the cache");
-            first = cache.nextFree();
-            cache.setCache(first, "https://people.freebsd.org/~crees/removed_ports/index.xml");
-            timestamp("Cache made, now let's try to access it and get the first thirty characters...");
-            Console.WriteLine(cache.getCache(first).Substring(0, 30));
-            timestamp("Let's try again...");
-            Console.WriteLine(cache.getCache(first).Substring(0, 30));
-            timestamp("Woah, that was quicker!");
-            second = cache.nextFree();
-            cache.setCache(second, "another_slow_url");
+            timestamp("About to make the cache"); // Prints the current timestamp to the console alongside a strings
+            first = cache.nextFree(); // Finds the next available space, or returns the least used cache if there is no space available
+            cache.setCache(first, "https://people.freebsd.org/~crees/removed_ports/index.xml"); // Sets the cache to a url
+            timestamp("Cache made, now let's try to access it and get the first thirty characters..."); // Prints the timestamp to the console so that the time taken to cache the webpage can be recorded
+            Console.WriteLine(cache.getCache(first).Substring(0, 30)); // Prints the first 30 characters from the cache to the console
+            timestamp("Let's try again..."); // Prints the timestamp agan
+            Console.WriteLine(cache.getCache(first).Substring(0, 30)); // Again, accesses the cache
+            timestamp("Woah, that was quicker!"); // Then records the timestamp to compare how long it took to load
+            second = cache.nextFree(); // Ditto line 140
+            cache.setCache(second, "https://google.com"); // Caches another url
             Console.WriteLine(cache.getCache(second).Substring(0, 30));
             Console.WriteLine(cache.getCache(second).Substring(0, 30));
             Console.WriteLine(cache.getCache(second).Substring(0, 30));
